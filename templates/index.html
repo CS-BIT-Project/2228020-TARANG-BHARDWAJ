@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WaveTune</title>
+    <style>
+        /* Set blurred background image on body */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://i.pinimg.com/736x/0a/ad/70/0aad70e92563196e3efac2a0091fbe01.jpg") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Add a blur overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.2);
+            z-index: 0;
+        }
+
+        /* Main container styling */
+        .container {
+            position: relative;
+            background: linear-gradient(135deg, #00c6ff, #0072ff); /* BLUE-GREEN Gradient */
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #fff; /* Changed text to white for better contrast */
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        p {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 20px;
+            padding-left: 20px;
+            color: #ffffff;
+        }
+
+        li {
+            margin: 12px 0;
+            font-size: 1.1em;
+        }
+
+        .button {
+            background: linear-gradient(to right, #11998e, #38ef7d); /* Blue-green button gradient */
+            border: none;
+            color: white;
+            padding: 14px 30px;
+            font-size: 16px;
+            margin: 20px 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #38ef7d, #11998e);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Welcome to WaveTune!</h1>
+        <p><strong>How to use:</strong></p>
+        <ul>
+            <li>👉 Stretch your index finger and thumb apart → Volume Full 🔊 100%.</li>
+            <li>🤏 Bring your index finger and thumb close/touching → Volume Mute 🔇 0%</li>
+        </ul>
+
+        <button class="button" onclick="start()">🎨 Start Volume Controller</button>
+        <button class="button" onclick="stop()">🛑 Stop Volume Controller</button>
+    </div>
+
+    <script>
+        function start() {
+            fetch('/start')
+                .then(res => res.text())
+                .then(alert)
+                .catch(err => alert("Error: " + err));
+        }
+
+        function stop() {
+            fetch('/stop')
+                .then(res => res.text())
+                .then(alert)
+                .catch(err => alert("Error: " + err));
+        }
+    </script>
+</body>
+</html>
